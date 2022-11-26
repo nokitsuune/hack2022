@@ -15,6 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from back import views as timetable_views
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'timetable_week', timetable_views.WeekViewSet)
+router.register(r'timetable_day', timetable_views.DayViewSet)
+
 
 
 urlpatterns = [
@@ -22,4 +29,6 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
     path('auth/', include('djoser.urls.jwt')),
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
