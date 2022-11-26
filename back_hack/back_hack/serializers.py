@@ -1,4 +1,4 @@
-from back.models import TimetableDay, TimetableWeek
+from back.models import TimetableDay, TimetableWeek, AuthUser
 from rest_framework import serializers
 from django_filters import rest_framework as filters
 
@@ -28,4 +28,10 @@ class WeekFilter(filters.FilterSet):
          model = TimetableWeek
          fields = ['kafedra', 'kurs', 'group']
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        # Модель, которую мы сериализуем
+        model = AuthUser
+        # Поля, которые мы сериализуем
+        fields = ["id", "username", "first_name", "last_name", "mark_event", "email", "id_timetable"]
 

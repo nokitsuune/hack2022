@@ -21,6 +21,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'timetable_week', timetable_views.WeekViewSet)
 router.register(r'timetable_day', timetable_views.DayViewSet)
+router.register(r'timetable_user', timetable_views.UserViewSet)
 
 
 
