@@ -1,62 +1,41 @@
 import { useState } from 'react';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import { Link } from 'react-router-dom';
+
 import Week from './Week';
 import React from 'react';
+import Button from 'react-bootstrap/esm/Button';
+
 
 
 function TimeTable() {
     const [date, setDate] = useState(new Date());
 
 
-    function addDays(date, days) {
-        var result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
+    const[ev, SetEv]= useState([])
+
+    const addEvent = (userEvent) =>{
+      const newEv = {
+          id: ev.length,
+          date: userEvent.EvDate,
+          event: userEvent.Ev,
+          dow: userEvent.dOW,
       }
+      {console.log(ev)}
+      SetEv([...ev, newEv])
+      
+}
 
- 
-      const week=[
-        {
-       
-        day:addDays(date, 0).getDate()
-        },
-        {
-         
-          day:addDays(date, 1).getDate()
-          },
-        {
-          
-          day:addDays(date, 2).getDate()
-        },
-        {
-          
-          day:addDays(date, 3).getDate()
-          },
-        {
-            
-            day:addDays(date, 4).getDate()
-        },
-        {
-        
-          
-          day:addDays(date, 5).getDate()
-          },
-          {
-           
-            
-            day:addDays(date, 6).getDate()
-          }
-        ]
-
-        
     return (
       <div className='timetable'>
-        <h1 className='text-center'></h1>
-        <div className='calendar-container'>
-          <Calendar onChange={setDate} value={date}></Calendar>
+        <div className='addEvents'>
+          <Link to="/main2">
+              <Button className='buttonn1' > + </Button>
+          </Link>
+          <Calendar onChange={setDate} value={date} ></Calendar>
         </div>
-        <Week week={week}/>
+       
+            <Week date={date} addEvent={addEvent}/>
       </div>
     );
   }
